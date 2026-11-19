@@ -32,7 +32,7 @@
   function buscar(lista, id) { for (var i = 0; i < lista.length; i++) if (lista[i].id === id) return lista[i]; return null; }
   function archivoDe(a) { return (a.zip || '').split('/').pop(); }
   function urlZip(a) {
-    if (!CONTADOR_ACTIVO) return a.zip;
+    if (!CONTADOR_ACTIVO || (cuentas && cuentas[archivoDe(a)] == null)) return a.zip;
     return 'https://github.com/' + encodeURIComponent(DESC.usuario) + '/' + encodeURIComponent(DESC.repositorio) +
       '/releases/download/' + encodeURIComponent(DESC.etiqueta || 'apps') + '/' + encodeURIComponent(archivoDe(a));
   }
@@ -186,34 +186,51 @@
   }
   enlaceExterno('enlace-sube', ENL.subeTuApp);
 
-  /* ---------- Contador de descargas (GitHub Releases, sin coste) ----------
-     Una sola petición por visita a la API pública de GitHub; se guarda 10 minutos
-     en el navegador. Si falla, la web funciona igual y no muestra contadores. */
+  /* ---------- Contador de descargas (GitHub Releases, sin coste ni claves) ----------
+     Las cifras son las que da GitHub para cada ZIP de la release: download_count,
+     un total acumulado. Se consulta la API pública (sin token), una vez por visitante
+     cada 15 minutos como máximo (se guarda en el navegador). Si GitHub no responde
+     o se agota el límite (60 consultas por hora y dirección IP), la web funciona igual
+     y simplemente no muestra cifras: nunca se inventan ni se calculan en local. */
+  var MINUTOS_CACHE = 15;
   function aplicarCuentas(datos) {
     cuentas = datos;
+    // Cifra por app
     var spans = document.querySelectorAll('.ficha__descargas');
     for (var i = 0; i < spans.length; i++) {
       var n = cuentas[spans[i].getAttribute('data-archivo')];
       if (n != null) { spans[i].textContent = textoDescargas(n); spans[i].hidden = false; }
     }
+    // Si algún ZIP del catálogo no está en la release, su botón usa la copia de docs/descargas/
+    var botones = document.querySelectorAll('.ficha a.marcador[download]');
+    for (var j = 0; j < botones.length; j++) {
+      var arch = botones[j].getAttribute('download');
+      var app = APPS.filter(function (a) { return archivoDe(a) === arch; })[0];
+      if (app && cuentas[arch] == null) botones[j].setAttribute('href', app.zip);
+    }
+    // Total: solo las apps publicadas en el catálogo
+    var total = 0, hay = false;
+    APPS.forEach(function (a) { var n = cuentas[archivoDe(a)]; if (n != null) { total += n; hay = true; } });
+    var $total = document.getElementById('total-descargas');
+    if ($total && hay) { $total.textContent = textoDescargas(total) + ' en total'; $total.hidden = false; }
   }
   function cargarCuentas() {
     if (!CONTADOR_ACTIVO || !window.fetch) return;
     var clave = 'descargas:' + DESC.usuario + '/' + DESC.repositorio + '@' + (DESC.etiqueta || 'apps');
     try {
-      var guardado = JSON.parse(sessionStorage.getItem(clave) || 'null');
-      if (guardado && Date.now() - guardado.t < 10 * 60 * 1000) { aplicarCuentas(guardado.d); return; }
+      var guardado = JSON.parse(localStorage.getItem(clave) || 'null');
+      if (guardado && Date.now() - guardado.t < MINUTOS_CACHE * 60 * 1000) { aplicarCuentas(guardado.d); return; }
     } catch (e) { /* sin almacenamiento: se pide a GitHub */ }
     fetch('https://api.github.com/repos/' + encodeURIComponent(DESC.usuario) + '/' + encodeURIComponent(DESC.repositorio) +
           '/releases/tags/' + encodeURIComponent(DESC.etiqueta || 'apps'), { headers: { Accept: 'application/vnd.github+json' } })
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function (rel) {
         var d = {};
-        (rel.assets || []).forEach(function (as) { d[as.name] = as.download_count || 0; });
-        try { sessionStorage.setItem(clave, JSON.stringify({ t: Date.now(), d: d })); } catch (e) { /* */ }
+        (rel.assets || []).forEach(function (as) { if (as.state === 'uploaded') d[as.name] = as.download_count || 0; });
+        try { localStorage.setItem(clave, JSON.stringify({ t: Date.now(), d: d })); } catch (e) { /* */ }
         aplicarCuentas(d);
       })
-      .catch(function () { /* sin contador: no pasa nada */ });
+      .catch(function () { /* sin cifras: no pasa nada */ });
   }
   cargarCuentas();
 
@@ -230,5 +247,13 @@
   }
 
   pintar(false);
-  if (ruta()) document.getElementById('biblioteca').scrollIntoView({ block: 'start' });
+
+  /* Al abrir o recargar la web, empezar siempre arriba, en la portada con las carpetas.
+     Los móviles suelen recordar la posición anterior o la carpeta abierta (#/…) y
+     abrían la web a mitad de página. Solo se respeta un ancla normal (#sube…). */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (!location.hash || location.hash.indexOf('#/') === 0) {
+    window.scrollTo(0, 0);
+    window.addEventListener('load', function () { window.scrollTo(0, 0); });
+  }
 })();

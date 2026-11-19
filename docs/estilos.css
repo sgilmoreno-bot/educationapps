@@ -120,6 +120,8 @@ a:hover { color: var(--tinta); }
 .pasos li { display: flex; align-items: center; gap: 8px; }
 .pasos span { font-family: var(--mano); display: inline-grid; place-items: center; width: 1.8em; height: 1.8em; border: 2px solid var(--tinta); border-radius: 50% 45% 52% 48%; font-size: .95rem; }
 .aviso { color: var(--tinta-suave); margin: 0 0 2rem; }
+.total-descargas { display: inline-block; margin: -1.2rem 0 2rem; font-family: var(--mano); text-transform: uppercase; letter-spacing: .03em; font-size: 1.05rem; padding: .25em .7em .2em; background: var(--brocha) center / 100% 100% no-repeat; transform: rotate(-1deg); }
+.total-descargas[hidden] { display: none; }
 
 .buscador { max-width: 560px; margin: 0 0 1.2rem; }
 .buscador label { display: block; font-family: var(--mano); text-transform: uppercase; font-size: 1.05rem; letter-spacing: .03em; margin-bottom: 6px; }

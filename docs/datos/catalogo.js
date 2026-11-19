@@ -19,8 +19,8 @@ window.ENLACES = {
    Mientras «usuario» esté vacío, los ZIP se descargan desde docs/descargas/
    y no se muestra ningún contador. */
 window.DESCARGAS = {
-  usuario: '',        // tu usuario de GitHub
-  repositorio: '',    // nombre del repositorio de la web
+  usuario: 'sgilmoreno-bot',    // usuario de GitHub
+  repositorio: 'educationapps', // nombre del repositorio de la web
   etiqueta: 'apps'    // etiqueta (tag) de la release donde están los ZIP
 };
 
