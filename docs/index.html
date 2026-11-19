@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apps educativas gratuitas</title>
+<meta name="description" content="Biblioteca de aplicaciones educativas gratuitas para descargar. Funcionan sin conexión y sin instalar nada.">
+<meta name="theme-color" content="#F6F1E7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<a class="saltar" href="#biblioteca">Saltar a la biblioteca</a>
+
+<header class="cabecera">
+  <a class="marca" href="#/">Apps educativas</a>
+  <nav aria-label="Principal">
+    <ul>
+      <li><a href="#biblioteca">Biblioteca</a></li>
+      <li><a href="#sube">Sube tu app</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="portada" aria-labelledby="titulo-portada">
+ <div class="portada__texto">
+  <h1 id="titulo-portada" class="portada__titulo">
+    Estas aplicaciones<br>son <span class="subrayado">gratuitas.</span>
+  </h1>
+  <p class="portada__sub"><span class="portada__aviso">No sustituyen<br>a los libros oficiales.</span><br>Si te han servido de ayuda<br>y quieres colaborar:</p>
+
+
+  <svg class="flechas" viewBox="0 0 520 170" aria-hidden="true" focusable="false">
+    <path d="M196 6 C190 60 146 96 130 156" />
+    <path d="M110 136 L129 159 L150 141" />
+  </svg>
+
+  <ul class="portada__acciones">
+    <li><a class="marcador marcador--grande" href="#sube">“Sube tu app”</a></li>
+  </ul>
+ </div>
+  <nav class="portada__cursos" aria-label="Ir a un curso">
+    <ul id="accesos-cursos"></ul>
+  </nav>
+</section>
+
+<main id="biblioteca" class="biblioteca" tabindex="-1">
+  <div class="biblioteca__cabeza">
+    <h2 class="rotulo">La biblioteca</h2>
+    <ol class="pasos" aria-label="Cómo funciona">
+      <li><span>1</span> Elige una carpeta</li>
+      <li><span>2</span> Descarga el ZIP</li>
+      <li><span>3</span> Descomprímelo</li>
+      <li><span>4</span> Abre el archivo .html</li>
+    </ol>
+    <p class="aviso">Funcionan en tu ordenador, sin conexión y sin instalar nada.</p>
+  </div>
+
+  <form class="buscador" role="search" onsubmit="return false">
+    <label for="q">Busca una app</label>
+    <input id="q" type="search" autocomplete="off" placeholder="Nombre, asignatura, curso o tema…">
+  </form>
+
+  <p id="estado" class="estado" aria-live="polite"></p>
+  <div id="contenido"></div>
+  <noscript><p class="estado">Para ver el catálogo hay que activar JavaScript en el navegador.</p></noscript>
+</main>
+
+<section id="sube" class="colabora" aria-labelledby="t-sube">
+  <h2 id="t-sube" class="rotulo">Sube tu app</h2>
+  <p>¿Has creado una aplicación educativa y quieres compartirla gratis? Envíamela. La reviso y, si encaja, la añado a la biblioteca con tu nombre.</p>
+  <ul class="requisitos">
+    <li>Tiene que funcionar descargada, abriendo un archivo .html, sin instalar programas.</li>
+    <li>No puede depender de internet ni de servicios externos.</li>
+    <li>Tienes que ser su autor o autora, o tener permiso para compartirla, y también sus imágenes y textos.</li>
+    <li>Nada se publica sin revisión previa.</li>
+  </ul>
+  <p><a id="enlace-sube" class="marcador" href="#sube">Enviar mi app</a></p>
+</section>
+
+<footer class="pie">
+  <p>Aplicaciones educativas gratuitas · Descárgalas, úsalas y compártelas.</p>
+</footer>
+
+<script src="datos/catalogo.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

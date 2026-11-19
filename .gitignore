@@ -1,0 +1,21 @@
+# Archivos del sistema
+.DS_Store
+**/.DS_Store
+__MACOSX/
+*.swp
+
+# Copias de trabajo de las apps (se distribuyen solo como ZIP en docs/descargas/)
+copias-apps/
+
+# Apps que no se publican todavía (derechos pendientes)
+pendientes/
+
+# Referencia de diseño (no la usa la web)
+imagenes/
+
+# Por seguridad: nunca subir credenciales ni configuración local
+.env
+.env.*
+*.key
+*.pem
+.claude/
