@@ -19,3 +19,6 @@ imagenes/
 *.key
 *.pem
 .claude/
+
+# Fuentes de trabajo de apps adaptadas (se distribuyen solo como ZIP)
+fuentes-apps/

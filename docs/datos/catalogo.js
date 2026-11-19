@@ -87,6 +87,16 @@ window.APPS = [
     nota: 'Lee los textos en voz alta con la voz de tu ordenador.'
   },
   {
+    nombre: 'Gases and Solutions',
+    curso: '3-eso',
+    asignatura: 'fisica-quimica',
+    descripcion: 'El estado gaseoso, las leyes de los gases, los cambios de estado y las disoluciones, con simuladores, predicciones y problemas paso a paso.',
+    zip: 'descargas/gases-y-disoluciones.zip',
+    peso: 89417,
+    abrir: 'Gases-and-Solutions.html',
+    idioma: 'Inglés y español'
+  },
+  {
     nombre: 'Lengua y Literatura: clases de palabras',
     curso: '3-eso',
     asignatura: 'lengua',
