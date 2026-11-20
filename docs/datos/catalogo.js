@@ -105,5 +105,15 @@ window.APPS = [
     peso: 81990,
     abrir: 'Lengua-y-Literatura.html',
     nota: 'Lee los textos en voz alta con la voz de tu ordenador.'
+  },
+  {
+    nombre: 'Nutrition & Digestion',
+    curso: '3-eso',
+    asignatura: 'biologia',
+    descripcion: 'La función de nutrición, los nutrientes, la energía, la dieta saludable y el aparato digestivo, con simuladores, un plato para montar, un recorrido por el tubo digestivo y modo examen.',
+    zip: 'descargas/nutrition-and-digestion.zip',
+    peso: 105998,
+    abrir: 'Nutrition-and-Digestion.html',
+    idioma: 'Inglés y español'
   }
 ];
