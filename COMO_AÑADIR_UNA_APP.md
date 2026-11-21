@@ -32,9 +32,11 @@ La web no ejecuta ninguna app: solo ofrece los ZIP para descargarlos.
      descripcion: 'Una o dos frases sobre qué aprende el alumnado.',
      zip: 'descargas/mates-fracciones.zip',
      peso: 123456,
-     abrir: 'index.html'
+     abrir: 'index.html',
+     fecha: '2026-12-01'           // día en que la añades: sale en el aviso «Últimos temas subidos» de la portada
    },
    ```
+   Con `fecha`, la app aparece 30 días en el aviso «Últimos temas subidos» de la portada (se muestran las 3 más recientes). Después el aviso se quita solo. Si no quieres anunciarla, omite `fecha`.
    Los cursos y sus asignaturas están en `window.CURSOS`. Para añadir una asignatura o un curso nuevos, se añade una línea allí. Una asignatura sin apps aparece como «Próximamente».
 
 Abre `docs/index.html` con doble clic para ver el resultado. El diseño, las carpetas, el buscador y el contador se actualizan solos.

@@ -63,6 +63,9 @@ window.CURSOS = [
    abrir        archivo que hay que abrir tras descomprimir
    idioma       opcional
    nota         opcional: aviso breve
+   fecha        opcional: día en que se añadió, 'AAAA-MM-DD'. Las apps con fecha
+                de los últimos 30 días salen en el aviso «Últimos temas subidos» de la portada
+                (las 3 más recientes). Pasados 30 días, el aviso desaparece solo.
    publicar     opcional: false = la app NO aparece en la web (p. ej. pendiente
                 de revisar derechos). Su ZIP se guarda fuera de docs/, en pendientes/. */
 window.APPS = [
@@ -104,7 +107,8 @@ window.APPS = [
     zip: 'descargas/lengua-y-literatura-clases-de-palabras.zip',
     peso: 81990,
     abrir: 'Lengua-y-Literatura.html',
-    nota: 'Lee los textos en voz alta con la voz de tu ordenador.'
+    nota: 'Lee los textos en voz alta con la voz de tu ordenador.',
+    fecha: '2026-11-20'
   },
   {
     nombre: 'Nutrition & Digestion',
@@ -114,6 +118,7 @@ window.APPS = [
     zip: 'descargas/nutrition-and-digestion.zip',
     peso: 105998,
     abrir: 'Nutrition-and-Digestion.html',
-    idioma: 'Inglés y español'
+    idioma: 'Inglés y español',
+    fecha: '2026-11-20'
   }
 ];

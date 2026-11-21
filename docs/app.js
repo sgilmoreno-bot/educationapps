@@ -246,6 +246,26 @@
     }).join('');
   }
 
+  /* ---------- Aviso «Últimos temas subidos» de la portada (apps con fecha de los últimos 30 días) ---------- */
+  var DIAS_NOVEDAD = 30, MAX_NOVEDADES = 3;
+  var $nov = document.getElementById('novedades');
+  if ($nov) {
+    var hoy = Date.now();
+    var nuevas = APPS.map(function (a, i) { return { a: a, i: i, t: Date.parse((a.fecha || '') + 'T00:00:00') }; })
+      .filter(function (x) { return !isNaN(x.t) && x.t <= hoy && (hoy - x.t) / 864e5 <= DIAS_NOVEDAD; })
+      .sort(function (x, y) { return (y.t - x.t) || (y.i - x.i); })
+      .slice(0, MAX_NOVEDADES);
+    if (nuevas.length) {
+      $nov.innerHTML = '<span class="novedades__sello">Últimos temas subidos</span><ul>' + nuevas.map(function (x) {
+        var a = x.a, curso = buscar(CURSOS, a.curso), asig = curso ? buscar(curso.asignaturas, a.asignatura) : null;
+        var donde = [curso && curso.nombre, asig && asig.nombre].filter(Boolean).join(' · ');
+        return '<li><a href="#/' + esc(a.curso) + '/' + esc(a.asignatura) + '">' + esc(a.nombre) + '</a>' +
+          (donde ? ' <span class="novedades__donde">' + esc(donde) + '</span>' : '') + '</li>';
+      }).join('') + '</ul>';
+      $nov.hidden = false;
+    }
+  }
+
   pintar(false);
 
   /* Al abrir o recargar la web, empezar siempre arriba, en la portada con las carpetas.

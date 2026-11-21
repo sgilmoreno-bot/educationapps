@@ -15,6 +15,7 @@
   --mano: 'Permanent Marker', 'Marker Felt', 'Chalkboard SE', 'Comic Sans MS', cursive;
   --texto: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --ancho: 1120px;
+  --brocha-rosa: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100' preserveAspectRatio='none'%3E%3Cpath fill='%23F5A6C8' d='M10 18c40-7 95-4 150-8 70-5 140-6 226 1 6 0 9 4 8 9-2 20 2 40-1 58-1 6-4 9-10 9-80 2-150 7-230 6-50 0-95 2-138-3-6-1-9-4-9-10 1-18-3-38 0-55 1-4 2-6 4-7z'/%3E%3Cpath fill='%23EC86B4' opacity='.45' d='M30 30c90-6 220-8 340-3l-2 6c-120-4-240-2-336 4zM40 70c100 3 210 1 330-4l1 6c-120 6-230 7-332 3z'/%3E%3C/svg%3E");
   --brocha: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100' preserveAspectRatio='none'%3E%3Cpath fill='%23BCDD45' d='M10 18c40-7 95-4 150-8 70-5 140-6 226 1 6 0 9 4 8 9-2 20 2 40-1 58-1 6-4 9-10 9-80 2-150 7-230 6-50 0-95 2-138-3-6-1-9-4-9-10 1-18-3-38 0-55 1-4 2-6 4-7z'/%3E%3Cpath fill='%23A9CD2C' opacity='.45' d='M30 30c90-6 220-8 340-3l-2 6c-120-4-240-2-336 4zM40 70c100 3 210 1 330-4l1 6c-120 6-230 7-332 3z'/%3E%3C/svg%3E");
 }
 
@@ -45,6 +46,23 @@ a:hover { color: var(--tinta); }
 .cabecera ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 22px; flex-wrap: wrap; }
 .cabecera nav a { color: var(--tinta); text-decoration: none; font-weight: 700; font-size: .95rem; padding: 6px 0; background: linear-gradient(var(--lima), var(--lima)) left 88% / 0 .38em no-repeat; transition: background-size .25s ease; }
 .cabecera nav a:hover { background-size: 100% .38em; }
+
+/* ---------- Aviso «Últimos temas subidos» ---------- */
+.novedades {
+  grid-column: 1 / -1; justify-self: start; width: fit-content; max-width: min(100%, 640px); margin-top: 72px; padding: 9px 14px 10px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 7px;
+  border: 2px dashed var(--tinta); border-radius: 6px 12px 8px 10px / 10px 6px 12px 6px;
+  background: rgba(255,255,255,.5); font-size: .86rem;
+}
+.novedades[hidden] { display: none; }
+.novedades__sello {
+  font-family: var(--mano); text-transform: uppercase; letter-spacing: .04em; font-size: .9rem;
+  padding: .15em .7em .1em; background: var(--brocha-rosa) center / 100% 100% no-repeat; transform: rotate(-2deg);
+}
+.novedades ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.novedades a { font-weight: 700; color: var(--tinta); }
+.novedades a:hover { color: var(--verde-texto); }
+.novedades__donde { color: var(--tinta-suave); font-size: .8rem; }
 
 /* ---------- Portada (según la imagen de referencia) ---------- */
 .portada {
@@ -203,6 +221,7 @@ div.carpeta--vacia:hover { background: transparent; transform: none; }
 /* ---------- Móvil ---------- */
 @media (max-width: 640px) {
   .cabecera, .portada, .biblioteca, .colabora, .pie { padding-left: 16px; padding-right: 16px; }
+  .novedades { margin-top: 56px; }
   .portada { padding-top: 20px; padding-bottom: 50px; grid-template-columns: 1fr; }
   .portada__cursos ul { grid-auto-flow: column; justify-content: start; gap: 20px; padding: 0; }
   .portada__cursos { grid-column: 1; grid-row: auto; margin-top: 34px; }
